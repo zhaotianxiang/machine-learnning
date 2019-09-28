@@ -13,7 +13,7 @@
 1. [线性分类器/LR]()
 2. [支持向量机/SVM]()
 3. [朴素贝叶斯分类器/NB]()
-4. [K近邻/KNN]()
+4. [K近邻/KNN](https://github.com/zhaotianxiang/machine-learnning/tree/master/src/model)
 5. [决策树/DT]()
 6. [集成模型]()
 
