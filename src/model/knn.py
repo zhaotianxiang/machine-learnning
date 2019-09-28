@@ -1,10 +1,9 @@
-from numpy import *
-import matplotlib
+import numpy as np
 import matplotlib.pyplot as plt
 import operator
 
 def createDataSet():
-	group = array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
+	group = np.array([[1.0,1.1],[1.0,1.0],[0,0],[0,0.1]])
 	labels = ['a','a','b','b']
 	return group, labels
 
@@ -16,7 +15,7 @@ def file2matrix(filename):
 	numberOfValue = len(linesArray)
 
 	# init data set
-	mat = zeros((numberOfLines-1,numberOfValue))
+	mat = np.zeros((numberOfLines-1,numberOfValue))
 	index = 0
 	for line in lines:
 		line = line.strip()
@@ -25,17 +24,20 @@ def file2matrix(filename):
 			continue
 		mat[index] = listFromLine
 		index+=1
+	print(mat)
 	return mat
 
-def autoNorm(dataSet):
+def normalize(dataSet):
 	minVals = dataSet.min(0)
 	maxVals = dataSet.max(0)
 	ranges = maxVals - minVals
-	normDataSet = zeros(shape(dataSet))
+	
+	normDataSet = np.zeros(np.shape(dataSet))
 	m = dataSet.shape[0]
-	normDataSet = dataSet - tile(minVals,(m,1))
-	normDataSet = normDataSet/tile(ranges,(m,1))
-	return normDataSet,ranges,minVals
+	diffDataSet = dataSet - np.tile(minVals,(m,1))
+	normDataSet = diffDataSet/np.tile(ranges,(m,1))
+
+	return normDataSet
 
 def display(mat):
 	fig = plt.figure()
@@ -46,7 +48,7 @@ def display(mat):
 
 def classify(inX,dataSet,labels,k):
 	dataSetSize = dataSet.shape[0] # shqpe 返回矩阵的（4，2） dataSetSize = 4
-	diffMat = tile(inX,(dataSetSize,1)) -dataSet # plat inX
+	diffMat = np.tile(inX,(dataSetSize,1)) -dataSet # plat inX
 	sqDiffMat = diffMat**2 # 2次幂
 	print(sqDiffMat)
 	sqDistances = sqDiffMat.sum(axis=1)
@@ -66,6 +68,6 @@ def clfy(point):
 	return point,label
 
 data = file2matrix('../../data/knn/knn.txt')
-print(autoNorm(data))
+print(normalize(data))
 
 clfy([0,0])
