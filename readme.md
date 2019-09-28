@@ -8,7 +8,7 @@
 
 简单线性回归
 
-$ y = y=\beta 0+\beta 1x+\xi $
+y = y=\beta 0+\beta 1x+\xi
 
 多元线性回归
 
